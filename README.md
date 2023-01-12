@@ -1,6 +1,6 @@
 # SmartCalc v4.0
 
-Реализация SmartCalc v4.0 на языке Python.
+Implementation of SmartCalc v4.0 in Python.
 
 ## Contents
 
@@ -8,36 +8,40 @@
    1.1. [Introduction](#introduction)
 2. [Chapter II](#chapter-ii) 
 3. [Chapter III](#chapter-iii) \
-   3.1. [Part 1](#part-1-реализация-smartcalc-v40) \
-   3.2. [Part 2](#part-2-дополнительно-кредитный-калькулятор) \
-   3.3. [Part 3](#part-3-дополнительно-депозитный-калькулятор) \
-   3.4. [Part 4](#part-4-дополнительно-конфигурация-и-логирование) \
-   3.5. [Part 5](#part-5-дополнительно-js-графики)
+   3.1. [Part 1](#part-1-implementation-of-smartcalc-v40) \
+   3.2. [Part 2](#part-2-bonus-loan-сalculator) \
+   3.3. [Part 3](#part-3-bonus-deposit-calculator) \
+   3.4. [Part 4](#part-4-bonus-configuration-and-logging) \
+   3.5. [Part 5](#part-5-bonus-js-graphs)
+
 
 ## Chapter I
 
+
+
 ## Introduction
 
-В данном проекте Вам предстоит реализовать на языке программирования Python расширенную версию обычного калькулятора, 
-реализующую те же самые функции, что и разработанные ранее приложения в проектах SmartCalc v1.0, v2.0, v3.0. 
-Вам предстоит улучшить знания языка программирования Python, паттерна MVC и основ разработки Web-приложений.
+In this project you are to implement in Python programming language an extended version of the usual calculator, 
+which implements the same functions as the previously developed applications in the SmartCalc v1.0, v2.0, v3.0 projects. 
+You will improve your knowledge of the Python programming language, MVC pattern and the basics of Web application development.
 
 
 ## Chapter II
 
-### Подключение JavaScript к странице
+### Incliuding JavaScript to the page
 
-JavaScript может быть подключен в HTML двумя способами:
-- написание кода внутри HTML,
-- подключение в качестве ссылки на внешний файл.
+JavaScript can be included into HTML in two ways:
+- writing the code inside the HTML,
+- including it in as a link to an external file.
 
-Чаще всего JavaScript подключается именно в качестве внешнего файла.
+The most common way to include JavaScript is as an external file.
 
-##### Тег Script
+##### Tag Script
 
-Тег `<script>` - это то, что используется для подключения JavaScript. Он похож на тег `<link>`, который используется для подключения CSS-файлов.
+The `<script>` tag is what is used to include JavaScript. It is similar to the `<link>` tag which is used to connect CSS files.
 
-Вот очень простой фрагмент JavaScript, использующий тег `script`. Этот JavaScript записывается непосредственно на HTML-страницу. Он измненит название параграфа при нажатии на кнопку.
+Here is a very simple piece of JavaScript that uses the `script` tag. This JavaScript is written directly to the HTML page. It will change the title of the paragraph when the button is clicked.
+
 ```
 <p id="demo">A Paragraph</p>
 <button type="button" onclick="myFunction()">Try it</button>
@@ -49,18 +53,18 @@ function myFunction() {
 </script>
 ```
 
-##### Подключение внешнего файла
+##### Including an external file
 
-Чтобы подключить внешний файл JavaScript, можно использовать тег `script` с атрибутом `src`. Значением атрибута src должен быть путь к файлу JavaScript. Тогда пример выше будет выглядеть следующим образом. 
+To include an external JavaScript file, you can use the `script` tag with the `src` attribute. The value of the src attribute must be the path to the JavaScript file. Then the example above will look like this. 
 
-Файл myScript.js:
+myScript.js file:
 ```
 function myFunction() {
   document.getElementById("demo").innerHTML = "Paragraph changed.";
 }
 ```
 
-HTML файл:
+HTML file:
 ```
 <p id="demo">A Paragraph</p>
 <button type="button" onclick="myFunction()">Try it</button>
@@ -68,9 +72,9 @@ HTML файл:
  <script src="myScript.js"></script> 
 ```
 
-##### Подключение в Head
+##### Including in Head
 
-Внешние файлы JavaScript принято подключать не в `<body>` HTML файла, а в `<head>`. Тогда тот же пример будет выглядеть следующим образом:
+Normally you should include external JavaScript files not in the `<body>` of the HTML file but in the `<head>`. Then the same example will look like this:
 ```
 <html>
   <head>
@@ -88,89 +92,89 @@ HTML файл:
 
 ## Chapter III
 
-## Part 1. Реализация SmartCalc v4.0
+## Part 1. Implementation of SmartCalc v4.0
 
-Необходимо реализовать SmartCalc v4.0:
+It is necessary to implement SmartCalc v4.0:
 
-- Программа должна быть разработана на языке Python
-- Код программы должен находиться в папке src
-- При написании кода необходимо придерживаться Google Code Style
-- Необходимо разработать Web-приложение
-- Программа должна быть реализована с использованием любого MVC-фреймворка
-- Программа должна быть реализована с использованием паттерна MVC (100% Server-Side Rendering), а также:
-    - не должно быть кода бизнес-логики в коде представлений
-    - не должно быть кода интерфейса в контроллере и в модели
-    - контроллеры должны быть тонкими
-- Модель должна быть полностью переиспользована из проекта SmartCalc v3.0
-- В приложении должен быть реализован раздел справки с описанием интерфейса программы в произвольной форме
-- Программа должна хранить историю операций, позволять загружать выражения из истории и очищать историю целиком
-- История должна сохраняться между запусками приложения
-- На вход программы могут подаваться как целые числа, так и вещественные числа, записанные и через точку, и в экспоненциальной форме записи
-- Вычисление должно производится после полного ввода вычисляемого выражения и нажатия на символ `=`
-- Вычисление произвольных скобочных арифметических выражений в инфиксной нотации
-- Вычисление произвольных скобочных арифметических выражений в инфиксной нотации с подстановкой значения переменной _x_ в виде числа
-- Построение графика функции, заданной с помощью выражения в инфиксной нотации с переменной _x_  (с координатными осями, отметкой используемого масштаба и сеткой с адаптивным шагом)
-    - Не требуется предоставлять пользователю возможность менять масштаб
-- Область определения и область значения функций ограничиваются по крайней мере числами от -1000000 до 1000000
-    - Для построения графиков функции необходимо дополнительно указывать отображаемые область определения и область значения
-- Проверяемая точность дробной части - минимум 7 знаков после запятой
-- У пользователя должна быть возможность ввода до 255 символов
-- Скобочные арифметические выражения в инфиксной нотации должны поддерживать следующие арифметические операции и математические функции:
-    - **Арифметические операторы**:
+- The program must be developed in Python 3.11
+- The program code must be located in the src folder
+- It is necessary to follow Google Code Style when writing the code
+- It is necessary to develop the Web-application
+- The application must be implemented using MVC framework (Django or flask)
+- The program must be implemented using the MVC (100% Server-Side Rendering) pattern, and
+    - There should be no business logic code in the view code
+    - there must be no interface code in the controller and model
+    - controllers must be thin
+- The model must be completely reused from the SmartCalc v3.0 project
+- The application must implement a free-form help section describing the program interface
+- The program must store the history of operations, allow to load expressions from the history and clear the entire history
+- The history should be saved between application starts
+- Both integers and real numbers, written either via a point or in exponential form, can be input to the program
+- Calculation should be performed after the complete entry of the calculated expression and pressing the symbol `=`
+- Calculation of arbitrary bracketed arithmetic expressions in infix notation
+- Calculation of arbitrary bracketed arithmetic expressions in infix notation with substitution of _x_ variable as a number
+- Plotting a function defined using an expression in infix notation with the variable _x_ (with coordinate axes, scale marker, and grid with adaptive step)
+	- It is not necessary to provide the user with the ability to change the scale
+- The range of definition and the range of value of the functions are at least limited to numbers from -1000000 to 1000000
+- To plot a function it is necessary to additionally specify the displayed area of definition and area of value
+- Checked accuracy of the fractional part is at least 7 decimal places
+- The user must be able to enter up to 255 characters
+- Bracketed arithmetic expressions in infix notation must support the following arithmetic operations and mathematical functions:
+    - **Arithmetic operators**:
 
-      | Название оператора | Инфиксная нотация <br /> (Классическая) | Префиксная нотация <br /> (Польская нотация) |  Постфиксная нотация <br /> (Обратная польская нотация) |
+      | Operator name | Infix Notation <br />(Classic) | Prefix notation <br /> (Polish notation) |  Postfix notation <br />(Reverse Polish notation) |
       | ------ | ------ | ------ | ------ |
-      | Скобки | (a + b) | (+ a b) | a b + |
-      | Сложение | a + b | + a b | a b + |
-      | Вычитание | a - b | - a b | a b - |
-      | Умножение | a * b | * a b | a b * |
-      | Деление | a / b | / a b | a b \ |
-      | Возведение в степень | a ^ b | ^ a b | a b ^ |
-      | Остаток от деления | a mod b | mod a b | a b mod |
-      | Унарный плюс | +a | +a | a+ |
-      | Унарный минус | -a | -a | a- |
+      | Parentheses | (a + b) | (+ a b) | a b + |
+      | Addition | a + b | + a b | a b + |
+      | Subtraction | a - b | - a b | a b - |
+      | Multiplication | a * b | * a b | a b * |
+      | Division| a / b | / a b | a b \ |
+      | Rasing to the power | a ^ b | ^ a b | a b ^ |
+      | Remainder of division | a mod b | mod a b | a b mod |
+      | Unary plus | +a | +a | a+ |
+      | Unary minus | -a | -a | a- |
 
-      >Обратите внимание, что оператор умножения содержит обязательный знак `*`. Обработка выражения с опущенным знаком `*` является необязательной и остается на усмотрение разработчика
+      >Please note that the multiplication operator contains a mandatory `*` sign. Processing an expression with the `*` sign omitted is optional and left to the developer's discretion
 
-    - **Функции**:
+    - **Functions**:
 
-      | Описание функции | Функция |   
+      | Function description | Function |   
       | ---------------- | ------- |  
-      | Вычисляет косинус | cos(x) |   
-      | Вычисляет синус | sin(x) |  
-      | Вычисляет тангенс | tan(x) |  
-      | Вычисляет арккосинус | acos(x) | 
-      | Вычисляет арксинус | asin(x) | 
-      | Вычисляет арктангенс | atan(x) |
-      | Вычисляет квадратный корень | sqrt(x) |
-      | Вычисляет натуральный логарифм | ln(x) | 
-      | Вычисляет десятичный логарифм | log(x) |
+      | Calculates cosine | cos(x) |   
+      | Calculates sine | sin(x) |  
+      | Calculates tangent | tan(x) |  
+      | Calculates arc cosine | acos(x) | 
+      | Calculates the arcsine | asin(x) | 
+      | Calculates arctangent | atan(x) |
+      | Calculates square root | sqrt(x) |
+      | Calculates natural logarithm | ln(x) | 
+      | Calculates decimal logarithm | log(x) |
 
-## Part 2. Дополнительно. Кредитный калькулятор
+## Part 2. Bonus. Loan сalculator
 
-Предусмотреть специальный режим "кредитный калькулятор" (за образец можно взять сайты banki.ru и calcus.ru):
-- Вход: общая сумма кредита, срок, процентная ставка, тип (аннуитетный, дифференцированный)
-- Выход: ежемесячный платеж, переплата по кредиту, общая выплата
+Provide a special mode "loan calculator" (you can take websites like banki.ru and calcus.ru as an example):
+- Input: total loan amount, term, interest rate, type (annuity, differentiated)
+- Output: monthly payment, overpayment for the loan, total repayment
 
-## Part 3. Дополнительно. Депозитный калькулятор
+## Part 3. Bonus. Deposit calculator
 
-Предусмотреть специальный режим "калькулятор доходности вкладов" (за образец можно взять сайты banki.ru и calcus.ru):
-- Вход: сумма вклада, срок размещения, процентная ставка, налоговая ставка, периодичность выплат, капитализация процентов, список пополнений, список частичных снятий
-- Выход: начисленные проценты, сумма налога, сумма на вкладе к концу срока
+Provide a special mode "deposit calculator" (you can take websites like banki.ru and calcus.ru as an example):
+- Input: deposit amount, deposit term, interest rate, tax rate, periodicity of payments, capitalization of interest, list of additions, list of partial withdrawals
+- Output: accrued interest, tax amount, amount on deposit by the end of the term
 
-## Part 4. Дополнительно. Конфигурация и логирование
+## Part 4. Bonus. Configuration and logging
 
-Добавить в приложение настройки:
-- Добавить считывание настроек из файла конфигурации при запуске программы
-- Вынести в файл конфигурации от 3 параметров на выбор, например цвет заднего фона, размер шрифта и т. д.
-- Добавить описание редактируемых параметров в справку
+Add settings to the app:
+- Add reading of settings from configuration file when the program runs
+- Include in the configuration file 3 or more parameters to choose from, such as background color, font size, etc.
+- Add descriptions of editable parameters to help
 
-Добавить в приложение логирование:
-- В логах хранить историю операций
-- Логи сохранять в папку logs, по одному файлу на период ротации
-- Должна быть возможность настройки периода ротации логов (час/день/месяц)
-- Называть файлы в соответствии со следующим шаблоном: `logs_dd-MM-yy-hh-mm-ss` (указывается время создания файла)
+Add logging to the application:
+- Store operation history in logs
+- Save logs in the logs folder, one file per rotation period
+- It should be possible to set the period of logs rotation (hour/day/month)
+- Files must be named according to the following pattern: `logs_dd-MM-yy-hh-mm-ss` ( the time of file creation )
 
-## Part 5. Дополнительно. JS-графики
+## Part 5. Bonus. JS-graphs
 
-- Компонент, связанный с отрисовкой графиков, реализовать в виде JS-компонента с отрисовкой на стороне клиента
+- Implement the component related to rendering graphs as a JS component with client-side rendering
