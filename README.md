@@ -18,6 +18,8 @@ Implementation of SmartCalc v4.0 in Python.
 
 ## Chapter I
 
+![APP_5_SmartCalc_V4.0](misc/images/APP_5_SmartCalc_V4.0.jpg)
+
 Thomas found it extremely difficult to remain calm, but nevertheless he tried his best to hold on. He faced Chuck, who was extremely stubborn and tired, but still defended his position to the bitter end. The discussion between them was in full swing:
 
 `-` "OOP in Python? Don't be ridiculous, Thomas!" Chuck smiled sneeringly.
