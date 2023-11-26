@@ -208,4 +208,4 @@ Add logging to the application:
 
 - Implement the component related to rendering charts as a JS component with client-side rendering
 
-💡 [Tap here](https://forms.yandex.ru/cloud/64183038d04688004c656bb9/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
+💡 [Tap here](https://forms.yandex.ru/cloud/64183038d04688004c656bb9/) **to leave your feedback on the project**. Product Team really tries to make your educational experience better.
