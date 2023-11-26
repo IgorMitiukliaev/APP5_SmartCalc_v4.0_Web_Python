@@ -1,0 +1,102 @@
+{% extends 'root.html' %}
+{% block content %}
+<h1>Basic Calculator</h1>
+{% load static %}
+<script type="text/javascript" src={% static "js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "js/script.js" %}></script>
+<form id="calc-form" name='calc' method="post">
+  {% csrf_token %}
+  <table id="calcu">
+    <tr>
+      <td rowspan="3" colspan="6">
+        <textarea class="form-control" style="resize: none;" rows="5" id="result" name="comm"></textarea>
+      </td>
+      <td><input type="button" class="btn btn-outline-danger clear" value="C"></td>
+      <td><input type="button" class="btn btn-outline-danger bs" value="BS"></td>
+    </tr>
+    <tr>
+      <td><input type="button" class="btn btn-outline-danger clrhst" value="HIST"></td>
+      <td><input type="button" class="btn btn-outline-secondary" value="graph"></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" class="btn btn-success calculate" value="=">
+      </td>
+    </tr>
+
+
+    <tr>
+      <td><input type="button" class="btn btn-outline-secondary type" value="7"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="8"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="9"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="+"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="("></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="sin"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="cos"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="tan"></td>
+    </tr>
+    <tr>
+      <td><input type="button" class="btn btn-outline-secondary type" value="4"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="5"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="6"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="-"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value=")"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="asin"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="acos"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="atan"></td>
+    </tr>
+    <tr>
+      <td><input type="button" class="btn btn-outline-secondary type" value="1"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="2"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="3"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="*"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="X"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="x^y"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="sqrt"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="mod"></td>
+    </tr>
+    <tr>
+      <td><input type="button" class="btn btn-outline-secondary type" value="."></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="0"></td>
+      <td><input type="button" class="btn btn-outline-secondary sign" value="/ - /"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="/"></td>
+      <td></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="log"></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="ln"></td>
+      <td></td>
+    </tr>
+  </table>
+</form>
+<style>
+  table {
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px 5px 5px 5px;
+  }
+
+  input[type="button"] {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100px;
+  }
+
+  input[type="text"] {
+    margin: 5px 5px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+  }
+</style>
+{% endblock %}

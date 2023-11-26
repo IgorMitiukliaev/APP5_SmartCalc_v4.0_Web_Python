@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator v.4</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav bg-primary ">
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'root' %}">To MainPage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'calc' %}">Basic Calculator</a>
+            </li>
+        </ul>
+        {% block content %}{% endblock content %}
+    </div>
+</body>
+
+</html>
