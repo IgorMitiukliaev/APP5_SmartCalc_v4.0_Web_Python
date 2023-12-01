@@ -9,7 +9,7 @@
   <table id="calcu">
     <tr>
       <td rowspan="3" colspan="6">
-        <textarea class="form-control" style="resize: none;" rows="5" id="result" name="comm"></textarea>
+        <textarea class="form-control" style="resize: none;" rows="5" id="result" name="comm" >{{result}}</textarea>
       </td>
       <td><input type="button" class="btn btn-outline-danger clear" value="C"></td>
       <td><input type="button" class="btn btn-outline-danger bs" value="BS"></td>
@@ -19,9 +19,10 @@
       <td><input type="button" class="btn btn-outline-secondary" value="graph"></td>
     </tr>
     <tr>
-      <td colspan="2">
+      <td>
         <input type="submit" class="btn btn-success calculate" value="=">
       </td>
+      <td></td>
     </tr>
 
 
@@ -60,7 +61,7 @@
       <td><input type="button" class="btn btn-outline-secondary type" value="0"></td>
       <td><input type="button" class="btn btn-outline-secondary sign" value="/ - /"></td>
       <td><input type="button" class="btn btn-outline-secondary type" value="/"></td>
-      <td></td>
+      <td><input type="button" class="btn btn-outline-secondary type" value="exp"></td>
       <td><input type="button" class="btn btn-outline-secondary type" value="log"></td>
       <td><input type="button" class="btn btn-outline-secondary type" value="ln"></td>
       <td></td>

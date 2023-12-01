@@ -29,8 +29,12 @@ $(document).ready(function () {
         "ln": "ln",
         "X": "x",
         "mod": "mod",
-        "x^y": "^"
+        "x^y": "^", 
+        "exp": "e"
     }
+
+    let $textarea = $('#result');
+    $textarea.scrollTop($textarea[0].scrollHeight);
 
     $(".clear").click(function () {
         let res = $("#result")
@@ -68,9 +72,13 @@ $(document).ready(function () {
     }
 
 
-    $('#calc-form').submit(function () {
-        let new_val = $('#result').val().split('\n').pop()
-        $("#result").val(new_val);
-        return true;
-    });
+    // $('#calc-form').submit(function () {
+    //     let expr = $('#result').val().split('\n').pop()
+    //     if (expr.indexOf('x') >= 0) {
+    //         let result = expr.match(/(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d+\.?\d*)$/i)
+    //             alert(result[1])
+    //     }
+    //     $("#result").val(expr);
+    //     return true;
+    // });
 });
