@@ -1,0 +1,42 @@
+{% extends 'root.html' %}
+{% block content %}
+<h1>Basic Calculator</h1>
+{% load static %}
+<script type="text/javascript" src={% static "js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "js/graph.js" %}></script>
+<h2>{{ expr }}</h2>
+<section class="chart">
+
+    <form class="chart__data" action="#" method="POST">
+        {% csrf_token %}
+
+        <div class="chart_label x_range">
+            <label class="chart__label" for="domain_def">X range from: </label>
+            <input class="chart__input input-field" type="number" name="javascript" id="x_min" required>
+            <span>to: </span>
+            <input class="chart__input input-field" type="number" name="javascript" id="x_max" required>
+        </div>
+        <div class="chart_label y_range" >
+            <label class="chart__label" for="domain_def">Y range from: </label>
+            <input class="chart__input input-field" type="number" name="javascript" id="y_min" required>
+            <span>to: </span>
+            <input class="chart__input input-field" type="number" name="javascript" id="y_max" required>
+        </div>
+
+        <input class="chart__submit-button input-field btn btn-outline-secondary type" type="submit"
+            value="Show graph">
+    </form>
+
+    <div class="chart__canvas-wrapper ">
+        <canvas id="canvas" width="600" height="400">
+            Браузер не поддерживает Canvas
+        </canvas>
+    </div>
+</section>
+
+<style>
+    .chart_label {
+        padding:  10px 0px;
+    }
+</style>
+{% endblock %}

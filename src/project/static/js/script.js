@@ -37,48 +37,50 @@ $(document).ready(function () {
     $textarea.scrollTop($textarea[0].scrollHeight);
 
     $(".clear").click(function () {
-        let res = $("#result")
-        let res_val = res.val() == undefined ? "" : res.val()
-        let tmp_arr = res_val.split('\n')
-        tmp_arr.pop()
-        res_val = tmp_arr.join('\n')
-        res.val(res_val)
+        let res = $("#result");
+        let res_val = res.val() == undefined ? "" : res.val();
+        let tmp_arr = res_val.split('\n');
+        tmp_arr.pop();
+        res_val = tmp_arr.join('\n');
+        res.val(res_val);
     });
 
     $(".bs").click(function () {
-        let res = $("#result")
-        let res_val = res.val() == undefined ? "" : res.val()
-        res_val = check_str(res_val)
-        res.val(res_val)
+        let res = $("#result");
+        let res_val = res.val() == undefined ? "" : res.val();
+        res_val = check_str(res_val);
+        res.val(res_val);
     });
 
     $(".type").click(function () {
-        let res = $("#result")
-        let k = dict[$(this).val()]
-        let res_val = (res.val() == undefined ? "" : res.val()) + (k == undefined ? "" : k)
-        res.val(res_val)
+        let res = $("#result");
+        let k = dict[$(this).val()];
+        let res_val = (res.val() == undefined ? "" : res.val()) + (k == undefined ? "" : k);
+        res.val(res_val);
     });
 
     function check_str(s) {
-        let dict_values = Object.values(dict)
-        let res_len = s.length
-        let res_val = s
+        let dict_values = Object.values(dict);
+        let res_len = s.length;
+        let res_val = s;
         for (let v of dict_values) {
             if (res_val.endsWith(v)) {
-                return res_val.slice(0, res_len - v.length)
+                return res_val.slice(0, res_len - v.length);
             }
         };
-        return res_val.slice(0, res_len - 1)
+        return res_val.slice(0, res_len - 1);
     }
 
 
     // $('#calc-form').submit(function () {
-    //     let expr = $('#result').val().split('\n').pop()
-    //     if (expr.indexOf('x') >= 0) {
-    //         let result = expr.match(/(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d+\.?\d*)$/i)
-    //             alert(result[1])
-    //     }
-    //     $("#result").val(expr);
+    //     let expr = $('#result').val()
+    //     if (expr.length == 0)
+    //         $("#result").val(0);
+        // if (expr.indexOf('x') >= 0) {
+        //     let result = expr.match(/(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d+\.?\d*)$/i)
+        //         alert(result[1])
+        // }
+        // $("#result").val(expr);
     //     return true;
     // });
 });
