@@ -1,5 +1,5 @@
 import ctypes
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from basecalc.models import Calc
 from ctypes import cdll
 import re
@@ -37,6 +37,7 @@ def makecalc(request):
         c['result'] = db_hist
     else:
         hist, expr = extract_expr(inp)
+        print(expr)
         expr, corr = subst_var(expr)
         if corr:
             res = eval_expr(expr)
@@ -61,8 +62,11 @@ def subst_var(expr):
     regex = r"(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d*\.?\d*)$"
     m = re.search(regex, expr, re.IGNORECASE)
     if m:
+        expr = re.sub(r'[xX]',  m.group(2), m.group(1))
         expr = re.sub(r'[\s]', '', expr)
-        expr = '\tx = '
+    elif re.search(r'x', expr, re.IGNORECASE):
+        expr = re.sub(r'[\s]', '', expr)
+        expr = '\tx = ' 
         corr = False
     return expr, corr
 
@@ -95,4 +99,8 @@ def makegraph(request):
 
 def view_hist(request):
     hist = Calc.objects.all()
+    if request.POST.get('clear_hist'):
+        clear_hist()
+        return redirect(basecalc)
     return render(request, './history.html', {'hist': hist})
+

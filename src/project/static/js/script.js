@@ -54,8 +54,9 @@ $(document).ready(function () {
 
     $(".type").click(function () {
         let res = $("#result");
+        let val = res.val() == '0' ? '' : res.val();
         let k = dict[$(this).val()];
-        let res_val = (res.val() == undefined ? "" : res.val()) + (k == undefined ? "" : k);
+        let res_val = (val == undefined ? "" : val) + (k == undefined ? "" : k);
         res.val(res_val);
     });
 
@@ -109,19 +110,19 @@ $(document).ready(function () {
 
                 endRange = el.createTextRange();
                 endRange.collapse(false);
-                function goToSomeView(){
+                function goToSomeView() {
                     document.location.href = "{% url 'some_view' %}"
-                   }
-                    start += normalizedValue.slice(0, start).split("\n").length - 1;
+                }
+                start += normalizedValue.slice(0, start).split("\n").length - 1;
 
-                    if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
-                        end = len;
-                    } else {
-                        end = -textInputRange.moveEnd("character", -len);
-                        end += normalizedValue.slice(0, end).split("\n").length - 1;
-                    }
+                if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+                    end = len;
+                } else {
+                    end = -textInputRange.moveEnd("character", -len);
+                    end += normalizedValue.slice(0, end).split("\n").length - 1;
                 }
             }
+        }
 
         return {
             start: start,

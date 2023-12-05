@@ -9,7 +9,7 @@
     {% for h in hist %}
     <div><a>{{ h.comm_line}} = {{h.res_line}}</a></div>
     {% endfor %}
-    <input type="button"  class="btn btn-outline-secondary" value="back" name="back">
+    <a href="{% url 'calc' %}"><input type="button" class="btn btn-outline-secondary" value="back"></a>
     <input type="submit" class="btn btn-outline-danger" value="clear" name="clear_hist">
 </form>
 <style>
