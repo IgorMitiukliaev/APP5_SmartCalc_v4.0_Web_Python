@@ -3,10 +3,11 @@ from django.shortcuts import render
 from basecalc.models import Calc
 from ctypes import cdll
 import re
+import json
+
+
 calc_core = cdll.LoadLibrary('./cpp/calc.so')
 makeCalc = calc_core.makeCalc
-# makeCalc.argtypes = (ctypes.c_char_p,)
-# makeCalc.restype = ctypes.POINTER(ctypes.c_char)
 makeCalc.restype = ctypes.c_char_p
 
 # Create your views here.
@@ -19,25 +20,40 @@ def basecalc(request):
     return makecalc(request)
 
 
+def clear_hist():
+    Calc.objects.all().delete()
+
+
 def makecalc(request):
     c = {'result': ''}
     inp = request.POST.get('comm')
+    res = ''
+    db_hist = ''
+    for h in Calc.objects.all():
+        db_hist += '{0}\n{1}\n'.format(h.comm_line, h.res_line)
+    if len(db_hist) == 0:
+        db_hist = '0'
     if not inp or len(inp) == 0:
-        inp = '0'
-    hist, expr = extract_expr(inp)
-    print('hist = ', hist, ' expr = ', expr)
-    expr, corr = subst_var(expr)
-    if corr:
-        res = eval_expr(expr)
-        c['result'] = inp+'\n'+res.decode("utf-8")
+        c['result'] = db_hist
     else:
-        c['result'] = inp+expr
+        hist, expr = extract_expr(inp)
+        expr, corr = subst_var(expr)
+        if corr:
+            res = eval_expr(expr)
+            new_db_rec = Calc(comm_line=expr, res_line=res.decode("utf-8"))
+            new_db_rec.save()
+            c['result'] = inp.strip()+'\n'+res.decode("utf-8")
+        else:
+            c['result'] = inp+expr
     return render(request, './basecalc.html', context=c)
 
 
 def extract_expr(inp):
-    *a, b = inp.splitlines()
-    return '\n'.join(a), b
+    if inp and len(inp) > 0:
+        *a, b = inp.splitlines()
+        return a, b
+    else:
+        return '', '0'
 
 
 def subst_var(expr):
@@ -45,13 +61,9 @@ def subst_var(expr):
     regex = r"(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d*\.?\d*)$"
     m = re.search(regex, expr, re.IGNORECASE)
     if m:
-        expr = re.sub(r'[xX]',  m.group(2), m.group(1))
-        expr = re.sub(r'[\s]', '', expr)
-    elif re.search(r'x', expr, re.IGNORECASE):
         expr = re.sub(r'[\s]', '', expr)
         expr = '\tx = '
         corr = False
-    # print(expr)
     return expr, corr
 
 
@@ -67,18 +79,20 @@ def eval_expr(inp):
 
 
 def makegraph(request):
-    _points = 33
+    _points = 101
     x_min, x_max = -2, 2
     data = []
-    print('graph')
     inp = request.POST.get('comm')
     _, expr = extract_expr(inp)
-    print('expr ----> ', expr)
     for i in range(0, _points + 1):
-        x = i* (x_max - x_min)/_points
+        x = i * (x_max - x_min)/_points
         expr_ = subst_var_gr(expr, x)
         res = eval_expr(expr_)
-        data.append((x, res.decode('utf-8')))
-        # print(expr, ' = ', res.decode("utf-8"))
-    print(data)
-    return render(request, './graph.html', context={'expr': data})
+        data.append({'x': x, 'y': res.decode('utf-8')})
+    data_json = json.dumps(data)
+    return render(request, './graph.html', context={'expr': expr, 'data_json': data_json})
+
+
+def view_hist(request):
+    hist = Calc.objects.all()
+    return render(request, './history.html', {'hist': hist})

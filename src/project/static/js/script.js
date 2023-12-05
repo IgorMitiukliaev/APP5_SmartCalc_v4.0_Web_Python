@@ -29,7 +29,7 @@ $(document).ready(function () {
         "ln": "ln",
         "X": "x",
         "mod": "mod",
-        "x^y": "^", 
+        "x^y": "^",
         "exp": "e"
     }
 
@@ -59,6 +59,25 @@ $(document).ready(function () {
         res.val(res_val);
     });
 
+    $(".sign").click(function () {
+        let res = $textarea[0];
+        res.focus();
+        let sel = getInputSelection(res);
+        let res_val = res.value;
+        let num_val = res_val.slice(sel.start, sel.end);
+        if (sel.start > 1) {
+            if (res_val.at(sel.start - 2) == '-' && res_val.at(sel.start - 1) == '(' && res_val.at(sel.end) == ')') {
+                res_val = res_val.slice(0, sel.start - 2) + num_val + res_val.slice(sel.end, res_val.length + 1);
+            }
+            else {
+                res_val = res_val.slice(0, sel.start) + "(-" + num_val + ")" + res_val.slice(sel.end, res_val.length + 1);
+            }
+        } else {
+            res_val = res_val.slice(0, sel.start) + "-" + num_val + res_val.slice(sel.end, res_val.length + 1);
+        }
+        $("#result").val(res_val);
+    });
+
     function check_str(s) {
         let dict_values = Object.values(dict);
         let res_len = s.length;
@@ -71,16 +90,43 @@ $(document).ready(function () {
         return res_val.slice(0, res_len - 1);
     }
 
+    function getInputSelection(el) {
+        var start = 0, end = 0, normalizedValue, range,
+            textInputRange, len, endRange;
 
-    // $('#calc-form').submit(function () {
-    //     let expr = $('#result').val()
-    //     if (expr.length == 0)
-    //         $("#result").val(0);
-        // if (expr.indexOf('x') >= 0) {
-        //     let result = expr.match(/(^[\s\w\+\-\*\/\^\.\(\)]+)[\s:;]+[xX]\s*=\s*(\d+\.?\d*)$/i)
-        //         alert(result[1])
-        // }
-        // $("#result").val(expr);
-    //     return true;
-    // });
+        if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+            start = el.selectionStart;
+            end = el.selectionEnd;
+        } else {
+            range = document.selection.createRange();
+
+            if (range && range.parentElement() == el) {
+                len = el.value.length;
+                normalizedValue = el.value.replace(/\r\n/g, "\n");
+
+                textInputRange = el.createTextRange();
+                textInputRange.moveToBookmark(range.getBookmark());
+
+                endRange = el.createTextRange();
+                endRange.collapse(false);
+                function goToSomeView(){
+                    document.location.href = "{% url 'some_view' %}"
+                   }
+                    start += normalizedValue.slice(0, start).split("\n").length - 1;
+
+                    if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+                        end = len;
+                    } else {
+                        end = -textInputRange.moveEnd("character", -len);
+                        end += normalizedValue.slice(0, end).split("\n").length - 1;
+                    }
+                }
+            }
+
+        return {
+            start: start,
+            end: end
+        };
+    }
+
 });

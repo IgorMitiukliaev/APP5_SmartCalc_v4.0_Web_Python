@@ -24,8 +24,7 @@ API char* makeCalc(char* line) {
   std::string s(line);
   try {
     double res = m.makeCalc(s);
-    std::cout << line << "\t" << res << std::endl;
-    snprintf(buff, BUFF_SIZE, "%f", res);
+    snprintf(buff, BUFF_SIZE, "%g", res);
   } catch (std::exception& e) {
     snprintf(buff, BUFF_SIZE, "%s", e.what());
   }

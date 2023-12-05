@@ -1,0 +1,32 @@
+{% extends 'root.html' %}
+{% block content %}
+<h1>Basic Calculator</h1>
+{% load static %}
+<script type="text/javascript" src={% static "js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "js/script.js" %}></script>
+<form id="calc-form" name='calc' method="post">
+    {% csrf_token %}
+    {% for h in hist %}
+    <div><a>{{ h.comm_line}} = {{h.res_line}}</a></div>
+    {% endfor %}
+    <input type="button"  class="btn btn-outline-secondary" value="back" name="back">
+    <input type="submit" class="btn btn-outline-danger" value="clear" name="clear_hist">
+</form>
+<style>
+    input[type="button"] {
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 5px;
+        width: 100px;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 5px;
+        width: 100px;
+    }
+</style>
+{% endblock %}
