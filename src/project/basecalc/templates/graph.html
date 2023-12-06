@@ -8,26 +8,22 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src={% static "js/graph.js" %}></script>
 
-<h2>{{ expr }}</h2>
+<h2 id="expr">{{ expr }}</h2>
 <a>{{data|safe}}</a>
 <section class="chart">
 
-    <form class="chart__data" action="#" method="POST">
+    <form class="chart__data" action="" method="POST">
         {% csrf_token %}
-
+        <fieldset>
         <div class="chart_label x_range">
             <label class="chart__label" for="domain_def">X range from: </label>
-            <input class="chart__input input-field" type="number" name="javascript" id="x_min" required>
+            <input class="chart__input input-field" type="number" name="x_min" id="x_min" required value="{{ x_min }}">
             <span>to: </span>
-            <input class="chart__input input-field" type="number" name="javascript" id="x_max" required>
-        </div>
-        <div class="chart_label y_range">
-            <label class="chart__label" for="domain_def">Y range from: </label>
-            <input class="chart__input input-field" type="number" name="javascript" id="y_min" required>
-            <span>to: </span>
-            <input class="chart__input input-field" type="number" name="javascript" id="y_max" required>
-        </div>
-        <input class="chart__submit-button input-field btn btn-outline-secondary type" type="submit" value="Show graph">
+            <input class="chart__input input-field" type="number" name="x_max" id="x_max" required value="{{ x_max }}">
+            <input type="hidden" id="expr" name="comm" value={{expr}}>
+        </div> 
+    </fieldset>
+        <input class="btn btn-outline-secondary type" id="show-graph" type="submit" name="graph" value="Show graph">
     </form>
 
     <div style="display: none" id="jsonData" data_json="{{ data_json }}"></div>

@@ -37,7 +37,6 @@ def makecalc(request):
         c['result'] = db_hist
     else:
         hist, expr = extract_expr(inp)
-        print(expr)
         expr, corr = subst_var(expr)
         if corr:
             res = eval_expr(expr)
@@ -66,7 +65,7 @@ def subst_var(expr):
         expr = re.sub(r'[\s]', '', expr)
     elif re.search(r'x', expr, re.IGNORECASE):
         expr = re.sub(r'[\s]', '', expr)
-        expr = '\tx = ' 
+        expr = '\tx = '
         corr = False
     return expr, corr
 
@@ -83,18 +82,23 @@ def eval_expr(inp):
 
 
 def makegraph(request):
-    _points = 101
-    x_min, x_max = -2, 2
+    _points = 501
+    x_min = -1
+    x_max = 1
+    if request.method == "POST":
+        if request.POST.get("x_min"):
+            x_min = float(request.POST.get("x_min"))
+            x_max = float(request.POST.get("x_max"))
     data = []
     inp = request.POST.get('comm')
     _, expr = extract_expr(inp)
     for i in range(0, _points + 1):
-        x = i * (x_max - x_min)/_points
+        x = x_min + i * (x_max - x_min)/_points
         expr_ = subst_var_gr(expr, x)
         res = eval_expr(expr_)
         data.append({'x': x, 'y': res.decode('utf-8')})
     data_json = json.dumps(data)
-    return render(request, './graph.html', context={'expr': expr, 'data_json': data_json})
+    return render(request, './graph.html', context={'expr': expr, 'data_json': data_json, 'x_min': x_min, 'x_max': x_max})
 
 
 def view_hist(request):
@@ -103,4 +107,3 @@ def view_hist(request):
         clear_hist()
         return redirect(basecalc)
     return render(request, './history.html', {'hist': hist})
-

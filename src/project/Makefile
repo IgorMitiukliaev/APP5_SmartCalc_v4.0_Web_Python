@@ -5,7 +5,7 @@ run: venv lib
 	. env/bin/activate && python3 manage.py runserver 
 
 lib:
-	g++ -Wall -lstdc++ -shared -o ./cpp/calc.so -fPIC ./cpp/wrapper.cpp ./cpp/Model.cpp
+	test -f ./cpp/calc.so || g++ -Wall -lstdc++ -shared -o ./cpp/calc.so -fPIC ./cpp/wrapper.cpp ./cpp/Model.cpp
 
 clean:
 	rm -f cpp/*.so
