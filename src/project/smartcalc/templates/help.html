@@ -1,5 +1,17 @@
 {% extends 'root.html' %}
 {% block content %}
-<h1>Help!</h1>
+<h1>Calculator</h1>
+<p>The application works in 2 modes:</p>
+<ol>
+    <li>Basic calculations. You can type an expression using screen or hardware keyboard, then press " = " virtual button
+        to get a result. Successful calculations are stored in the app history.</li>
+    <li>Formula calculation. If an expression contains "x" variable, you can either type " x = " following the value
+        right after the expression, or just press " = ". In that case you will be prompted to enter value.</li>
+</ol>
+<p>"/ - /" button is a shortcut to wrap the selected part of the expressin with "(- ... )".</p>
+<p>"C" clears the bottom line on the display, "BS" clears the last symbol or function name, if the line ends with it.</p>
+<p></p>To get the expression chart, simply click "graph". </p>
+<p>To view calculation history, click "hist" button. After that you will be able to clear it completely.</p>
+
 {% load static %}
 {% endblock %}
